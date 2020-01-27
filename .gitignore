@@ -3,5 +3,6 @@
 !/**/
 !*.*
 
+*.out
 *.code-workspace
 *.DS_Store

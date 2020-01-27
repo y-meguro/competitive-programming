@@ -2,4 +2,4 @@
 
 ## About this repository
 
-- 競プロやる時のメモを書く
+- 競プロのログ
