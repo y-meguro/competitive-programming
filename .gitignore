@@ -3,6 +3,9 @@
 !/**/
 !*.*
 
+problem.txt
 *.out
+*.out*
+*.vscode
 *.code-workspace
 *.DS_Store
