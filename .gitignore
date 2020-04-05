@@ -4,6 +4,7 @@
 !*.*
 
 problem.txt
+input.txt
 *.out
 *.out*
 *.vscode
