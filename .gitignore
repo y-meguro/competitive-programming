@@ -5,6 +5,7 @@
 
 problem.txt
 input.txt
+tempCodeRunnerFile.cpp
 *.out
 *.out*
 *.vscode
