@@ -5,41 +5,34 @@ using ll = long long;
 using P = pair<int, int>;
 
 int main() {
-  int N;
-  ll K;
-  cin >> N >> K;
-
-  vector<int> A(N);
-  rep(i, N) {
-    cin >> A.at(i);
+  int n;
+  ll k;
+  cin >> n >> k;
+  vector<int> a(n, 0), f(n, 0);
+  int sum = 0;
+  rep(i, n) {
+    cin >> a.at(i);
+    sum += a.at(i);
   }
-  sort(A.begin(), A.end());
 
-  vector<ll> F(N);
-  rep(i, N) {
-    cin >> F.at(i);
-  }
-  sort(F.rbegin(), F.rend());
+  rep(i, n) cin >> f.at(i);
+  sort(a.begin(), a.end());
+  sort(f.rbegin(), f.rend());
 
-  ll l = 0;
-  ll r = 1e12 + 1;
-  ll ans = 0;
-
-  while (l <= r) {
+  ll l = -1, r = 1e13; // lは絶対にダメな値、rは絶対にOKな値にする
+  while (r - l > 1) {
     ll mid = (l + r) / 2;
-    ll sum = K;
-    rep(i, N) {
-      if (mid / F.at(i) < A.at(i)) {
-        sum -= A.at(i) - mid / F.at(i);
-      }
+    ll cnt = 0;
+    rep(i, n) {
+      cnt += max(0ll, a.at(i) - mid / f.at(i)); // a.at(i) - mid / f.at(i) が負になる場合ある
     }
-    if (sum < 0) {
-      l = mid + 1;
+    if (cnt <= k) {
+      r = mid;
     } else {
-      ans = mid;
-      r = mid - 1;
+      l = mid;
     }
   }
-  cout << ans << endl;
+
+  cout << r << endl;
   return 0;
 }
