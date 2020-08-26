@@ -12,22 +12,22 @@ int main() {
 
   vector<int> path;
   vector<int> order(n + 1, -1);
-
-  int next = 1;
-  while (order.at(next) == -1) {
-    order.at(next) = path.size();
-    path.push_back(next);
-    next = a.at(next - 1);
+  int v = 1;
+  while (order.at(v) == -1) {
+    order.at(v) = path.size();
+    path.push_back(v);
+    v = a.at(v - 1);
   }
-  int cycle = path.size() - order.at(next);
-  int before = order.at(next);
 
+  int period = path.size() - order.at(v);
+  int before = order.at(v);
   if (k < before) {
     cout << path.at(k) << endl;
   } else {
     k -= before;
-    k %= cycle;
+    k %= period;
     cout << path.at(before + k) << endl;
   }
+
   return 0;
 }
