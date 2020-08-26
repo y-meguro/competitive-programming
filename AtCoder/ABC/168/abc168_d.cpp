@@ -5,7 +5,7 @@ using ll = long long;
 using P = pair<int, int>;
 
 int main() {
-  ll n, m;
+  int n, m;
   cin >> n >> m;
   vector<vector<int>> edges(n);
   rep(i, m) {
@@ -18,19 +18,18 @@ int main() {
 
   // 幅優先探索を行う
   queue<int> q;
-  vector<bool> checked(n, false);
+  vector<int> d(n, -1);
   vector<int> sign(n, -1);
-
   q.push(0);
-  checked.at(0) = true;
+  d.at(0) = 0;
   while (!q.empty()) {
-    int u = q.front();
+    int v = q.front();
     q.pop();
-    for (int x : edges.at(u)) {
-      if (checked.at(x)) continue;
+    for (int x : edges.at(v)) {
+      if (d.at(x) != -1) continue;
       q.push(x);
-      checked.at(x) = true;
-      sign.at(x) = u;
+      d.at(x) = d.at(v) + 1;
+      sign.at(x) = v;
     }
   }
 
@@ -38,5 +37,6 @@ int main() {
   for (int i = 1; i < n; i++) {
     cout << sign.at(i) + 1 << endl;
   }
+
   return 0;
 }
