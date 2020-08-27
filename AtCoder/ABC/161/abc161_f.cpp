@@ -4,12 +4,12 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-vector<ll> enumDivisor(ll n) {
+vector<ll> enumDivisor(ll x) {
   vector<ll> res;
-  for (ll i = 1; i * i <= n; i++) {
-    if (n % i != 0) continue;
+  for (ll i = 1; i * i <= x; i++) {
+    if (x % i != 0) continue;
     res.push_back(i);
-    if (i * i != n) res.push_back(n / i);
+    if (i * i != x) res.push_back(x / i);
   }
   return res;
 }
