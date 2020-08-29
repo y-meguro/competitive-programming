@@ -3,20 +3,19 @@
 using namespace std;
 using ll = long long;
 using P = pair<int, int>;
-ll mod = 1e9 + 7;
 
 int main() {
   int m = 2019;
   string s;
   cin >> s;
-  int n = s.size();
   reverse(s.begin(), s.end());
 
-  int x = 1, tot = 0;
-  ll ans = 0;
-  vector<int> cnt(m, 0); // 余りの数ごとに何個あるか数えておく
+  // 余りをカウントする
+  vector<int> cnt(m, 0);
   cnt.at(0) = 1;
-  rep(i, n) {
+  int tot = 0, x = 1;
+  ll ans = 0;
+  for (int i = 0; i < (int)s.size(); i++) {
     tot += (s.at(i) - '0') * x;
     tot %= m;
     ans += cnt.at(tot);
