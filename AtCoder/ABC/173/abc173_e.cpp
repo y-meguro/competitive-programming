@@ -3,7 +3,7 @@
 using namespace std;
 using ll = long long;
 using P = pair<int, int>;
-ll mod = 1e9 + 7;
+const ll mod = 1e9 + 7;
 
 struct mint {
   ll x; // typedef long long ll;
@@ -40,7 +40,7 @@ ostream& operator<<(ostream& os, const mint& a) { return os << a.x;}
 int main() {
   int n, k;
   cin >> n >> k;
-  vector<int> a(n, 0);
+  vector<int> a(n);
   vector<int> pos, neg;
   rep(i, n) {
     cin >> a.at(i);
@@ -48,29 +48,28 @@ int main() {
     else pos.push_back(a.at(i));
   }
 
-  // 正にできる組み合わせがあるか調べる
+  // 正にできるかチェック
   bool ok = true;
-  int posSize = pos.size();
-  int negSize = neg.size();
-  if (posSize == 0) {
+  if (pos.size() == 0) {
     ok = (k % 2 == 0);
   } else {
-    if (n == k) ok = (negSize % 2 == 0);
+    if (n == k) ok = (neg.size() % 2 == 0);
   }
 
   mint ans = 1;
   if (!ok) {
-    // できない場合は絶対値の小さい順に取る
+    // 正にできない場合は絶対値の小さい順に取る
     sort(a.begin(), a.end(), [](int x, int y) {
       return abs(x) < abs(y);
     });
     rep(i, k) ans *= a.at(i);
   } else {
-    // できる場合は積を大きくできる組み合わせを選ぶ
-    sort(pos.begin(), pos.end());
+    // 正にできる場合は絶対値の大きいペアから順に取る
+    sort(pos.begin(), pos.end()); // 絶対値の大きいほうが後ろ
     sort(neg.rbegin(), neg.rend());
-    if (k % 2 == 1) {
-      ans *= pos.back();
+
+    if (k % 2 != 0) {
+      ans = pos.back();
       pos.pop_back();
     }
 
@@ -86,6 +85,7 @@ int main() {
       p.push_back(tmp);
     }
     sort(p.rbegin(), p.rend());
+
     rep(i, k/2) ans *= p.at(i);
   }
 
