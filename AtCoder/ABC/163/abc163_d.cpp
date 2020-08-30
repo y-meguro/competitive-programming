@@ -47,7 +47,8 @@ int main() {
 
   mint ans = 0;
   for (int i = k; i <= n + 1; i++) {
-    ll l = sum(0, i - 1), r = sum(n - i + 1, n);
+    ll l = sum(0, i - 1);
+    ll r = sum(n - i + 1, n);
     ans += r - l + 1;
   }
 
