@@ -10,7 +10,7 @@ int main() {
   int n;
   cin >> n;
   vector<int> a(n);
-  vector<int> c(A);
+  vector<int> c(A, 0);
   rep(i, n) {
     cin >> a.at(i);
     c.at(a.at(i))++;
@@ -22,8 +22,12 @@ int main() {
     for (int j = i; j < A; j += i) {
       cnt += c.at(j);
     }
-    if (cnt > 1) pairwise = false;
+    if (cnt > 1) {
+      pairwise = false;
+      break;
+    }
   }
+
   if (pairwise) {
     cout << "pairwise coprime" << endl;
     return 0;
@@ -33,9 +37,8 @@ int main() {
   rep(i, n) g = __gcd(g, a.at(i));
   if (g == 1) {
     cout << "setwise coprime" << endl;
-    return 0;
+  } else {
+    cout << "not coprime" << endl;
   }
-
-  cout << "not coprime" << endl;
   return 0;
 }
