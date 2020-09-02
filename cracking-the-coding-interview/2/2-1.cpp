@@ -24,9 +24,9 @@ void printList(Node* head) {
 // 一時的なバッファを使える場合。time complexity O(n), space complexity O(n)
 void removeDuplicate(Node* head) {
   if (head == nullptr || head->next == nullptr) return; // リストのNodeが1つもない場合と1つしかない場合はreturn
-  unordered_map<int, int> node_map;
   Node* prev = head;
   Node* curr = head->next;
+  unordered_map<int, int> node_map;
   node_map[prev->data] = 1;
   while (curr) {
     while (curr && node_map.find(curr->data) != node_map.end()) { // findが成功した場合(重複があった場合)は飛ばす
