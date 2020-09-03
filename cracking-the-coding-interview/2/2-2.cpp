@@ -9,7 +9,6 @@ struct Node {
 
 void insert(Node*& head, int data) {
   Node* newNode = new Node(data);
-  newNode->data = data;
   newNode->next = head;
   head = newNode;
 }
@@ -22,12 +21,12 @@ void printList(Node* head) {
   cout << "nullptr" << endl;
 }
 
-Node* kthToLastHelper(Node* head, int k, int& i) {
-  if (head == nullptr) return nullptr;
-  Node* node = kthToLastHelper(head->next, k, i);
+Node* kthToLastHelper(Node* curr, int k, int& i) {
+  if (curr == nullptr) return nullptr;
+  Node* node = kthToLastHelper(curr->next, k, i);
   ++i;
   if (i == k) {
-    return head;
+    return curr;
   }
   return node;
 }
@@ -45,21 +44,21 @@ Node* kthToLastIterative(Node* head, int k) {
   Node* ptr1 = head;
   Node* ptr2 = head;
 
-  // ptr1をpt2よりk個進める
+  // ptr2をptr1よりk個進める
   int i = 0;
   while (i < k && ptr1) {
-    ptr1 = ptr1->next;
+    ptr2 = ptr2->next;
     ++i;
   }
 
   // out of bounds
   if (i < k) return nullptr;
 
-  while (ptr1 != nullptr) {
+  while (ptr2) {
     ptr1 = ptr1->next;
     ptr2 = ptr2->next;
   }
-  return ptr2;
+  return ptr1;
 }
 
 int main() {
