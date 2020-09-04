@@ -21,6 +21,7 @@ void deleteNode(Node* node) {
   node->data = nextNode->data;
   node->next = nextNode->next;
   delete nextNode;
+  return;
 }
 
 int main() {
