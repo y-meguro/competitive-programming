@@ -7,16 +7,13 @@ struct Node {
   Node(int d) : data(d), next(nullptr) {}
 };
 
-// 最後尾に挿入する
 void insert(Node*& head, int data) {
   Node* newNode = new Node(data);
   if (head == nullptr) {
     head = newNode;
   } else {
     Node* curr = head;
-    while (curr->next) {
-      curr = curr->next;
-    }
+    while (curr->next) curr = curr->next;
     curr->next = newNode;
   }
 }
@@ -39,13 +36,13 @@ Node* partition(Node* head, int x) {
   Node* secondCurr = nullptr;
   Node* secondInitial = nullptr;
 
-  while (curr != nullptr) {
+  while (curr) {
     if (curr->data < x) {
-      if (firstCurr == nullptr) firstInitial = curr;
+      if (firstInitial == nullptr) firstInitial = curr;
       else firstCurr->next = curr;
       firstCurr = curr;
     } else {
-      if (secondCurr == nullptr) secondInitial = curr;
+      if (secondInitial == nullptr) secondInitial = curr;
       else secondCurr->next = curr;
       secondCurr = curr;
     }
@@ -63,6 +60,7 @@ int main() {
     insert(head, rand() % 10);
   }
   printList(head);
+
   printList(partition(head, 5));
   return 0;
 }
