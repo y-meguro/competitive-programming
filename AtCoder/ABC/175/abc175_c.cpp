@@ -7,24 +7,17 @@ using P = pair<int, int>;
 int main() {
   ll x, k, d;
   cin >> x >> k >> d;
-  if (x < 0) x = -x;
-
-  ll num = x / d;
-  ll r = x % d;
-  if (r > abs(r - d)) {
-    ++num;
-    r = abs(r - d);
-  }
+  x = abs(x);
 
   ll ans;
-  if (num < k) {
-    if ((k - num) % 2 == 0) {
-      ans = r;
-    } else {
-      ans = d - r;
-    }
-  } else {
+  ll num = x / d;
+  if (num > k) {
     ans = x - k * d;
+  } else {
+    k -= num;
+    x -= num * d;
+    if (k % 2 == 0) ans = x;
+    else ans = abs(x - d);
   }
 
   cout << ans << endl;
