@@ -16,29 +16,31 @@ int main() {
 
   ll ans = -1e18 - 1;
   rep(si, n) {
-    // まず周期を求める
+    // 周期を求める
+    int cycle = 0;
+    ll loopPoint = 0;
     int current = si;
-    vector<int> s;
-    ll tot = 0;
-    while (1) {
-      current = p.at(current);
-      s.push_back(c.at(current));
-      tot += c.at(current);
-      if (current == si) break;
+    while (true) {
+      int next = p.at(current);
+      loopPoint += c.at(next);
+      cycle++;
+      if (si == next) break;
+      current = next;
     }
 
     // 最大値を求める
-    int l = s.size();
-    ll t = 0;
-    rep(i, l) {
-      if (i + 1 > k) break;
-      t += s.at(i);
-      ll now = t;
-      if (tot > 0) {
-        ll loopNum = (k - i - 1) / l;
-        now += tot * loopNum;
+    ll tmp = 0;
+    current = si;
+    rep(i, cycle) {
+      if (i >= k) break;
+      int next = p.at(current);
+      tmp += c.at(next);
+      ll sum = tmp;
+      if (loopPoint > 0) {
+        sum += (k - i - 1) / cycle * loopPoint;
       }
-      ans = max(ans, now);
+      ans = max(ans, sum);
+      current = next;
     }
   }
 
