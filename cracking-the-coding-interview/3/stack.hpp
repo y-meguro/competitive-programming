@@ -12,20 +12,20 @@ class Stack {
 
     template <typename U>
     void push(U&& value) {
-      auto n = new Node(forward<U>(value), top);
+      Node* n = new Node(forward<U>(value), top);
       top = n;
       ++stackSize;
     }
 
     T& peek() {
-      if (!top) throw StackIsEmptyException();
+      if (isEmpty()) throw StackIsEmptyException();
       return top->value;
     }
 
     T pop() {
-      if (!top) throw StackIsEmptyException();
+      if (isEmpty()) throw StackIsEmptyException();
       auto value(move(top->value));
-      auto n = top;
+      Node* n = top;
       top = n->next;
       delete n;
       --stackSize;
