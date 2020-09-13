@@ -43,9 +43,6 @@ class Stack {
     class StackIsEmptyException {};
 
   private:
-    Node* top;
-    size_t stackSize;
-
     struct Node {
       T value;
       Node* next;
@@ -53,4 +50,7 @@ class Stack {
       Node(T&& v, Node* n) : value(move(v)), next(n) {}
       Node(const T& v, Node* n) : value(v), next(n) {}
     };
+
+    Node* top;
+    size_t stackSize;
 };
