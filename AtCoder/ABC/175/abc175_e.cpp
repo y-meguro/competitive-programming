@@ -5,8 +5,8 @@ using ll = long long;
 using P = pair<int, int>;
 #define chmax(x, y) x = max(x, y)
 
-int a[3005][3005];
-ll dp[3005][3005][4];
+int items[3001][3001];
+ll dp[3001][3001][4];
 
 int main() {
   int R, C, K;
@@ -14,16 +14,16 @@ int main() {
   rep(i, K) {
     int r, c, v;
     cin >> r >> c >> v;
-    a[r-1][c-1] = v;
+    items[r-1][c-1] = v;
   }
 
   rep(i, R) rep(j, C) {
-    for (int k = 2; k >= 0; k--) {
-      chmax(dp[i][j][k+1], dp[i][j][k] + a[i][j]);
+    for (int k = 2; k >= 0; --k) {
+      chmax(dp[i][j][k+1], dp[i][j][k] + items[i][j]);
     }
     rep(k, 4) {
-      chmax(dp[i+1][j][0], dp[i][j][k]);
       chmax(dp[i][j+1][k], dp[i][j][k]);
+      chmax(dp[i+1][j][0], dp[i][j][k]);
     }
   }
 
