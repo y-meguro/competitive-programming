@@ -8,21 +8,21 @@ using namespace std;
 using ll = long long;
 using P = pair<int, int>;
 
-const int mod = 1e9 + 7;
-const int mod = 998244353;
+const int MOD = 1e9 + 7;
+const int MOD = 998244353;
 struct mint {
   ll x; // typedef long long ll;
-  mint(ll x=0):x((x%mod+mod)%mod){}
+  mint(ll x=0):x((x%MOD+MOD)%MOD){}
   mint operator-() const { return mint(-x);}
   mint& operator+=(const mint a) {
-    if ((x += a.x) >= mod) x -= mod;
+    if ((x += a.x) >= MOD) x -= MOD;
     return *this;
   }
   mint& operator-=(const mint a) {
-    if ((x += mod-a.x) >= mod) x -= mod;
+    if ((x += MOD-a.x) >= MOD) x -= MOD;
     return *this;
   }
-  mint& operator*=(const mint a) { (x *= a.x) %= mod; return *this;}
+  mint& operator*=(const mint a) { (x *= a.x) %= MOD; return *this;}
   mint operator+(const mint a) const { return mint(*this) += a;}
   mint operator-(const mint a) const { return mint(*this) -= a;}
   mint operator*(const mint a) const { return mint(*this) *= a;}
@@ -35,7 +35,7 @@ struct mint {
   }
 
   // for prime mod
-  mint inv() const { return pow(mod-2);}
+  mint inv() const { return pow(MOD-2);}
   mint& operator/=(const mint a) { return *this *= a.inv();}
   mint operator/(const mint a) const { return mint(*this) /= a;}
 };
