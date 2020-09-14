@@ -9,7 +9,7 @@ using ll = long long;
 using P = pair<int, int>;
 
 const int MOD = 1e9 + 7;
-const int MOD = 998244353;
+// const int MOD = 998244353;
 struct mint {
   ll x; // typedef long long ll;
   mint(ll x=0):x((x%MOD+MOD)%MOD){}
