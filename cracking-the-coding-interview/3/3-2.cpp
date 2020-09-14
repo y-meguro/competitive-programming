@@ -30,8 +30,8 @@ class StackMin {
     }
 
   private:
-    Stack<T> stack;
-    Stack<T> minStack;
+    Stack<T> stack; // 最小値以外を管理
+    Stack<T> minStack; // 最小値を管理
 };
 
 int main() {
